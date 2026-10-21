@@ -1,0 +1,8 @@
+import groovy.json.JsonSlurper
+
+rootProject.name = 'project-foundation'
+def catalog = new JsonSlurper().parse(file('architecture/modules.json'))
+catalog.modules.each { spec ->
+    include(spec.name)
+    project(":${spec.name}").projectDir = file(spec.path)
+}

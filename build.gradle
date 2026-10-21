@@ -1,0 +1,39 @@
+import groovy.json.JsonSlurper
+
+plugins {
+    id 'base'
+}
+
+def catalog = new JsonSlurper().parse(file('architecture/modules.json'))
+allprojects {
+    group = 'org.projectfoundation'
+    version = '0.1.0-SNAPSHOT'
+}
+subprojects {
+    apply plugin: 'java-library'
+    tasks.withType(JavaCompile).configureEach {
+        options.release = catalog.javaRelease as Integer
+        options.encoding = 'UTF-8'
+    }
+    tasks.withType(Javadoc).configureEach {
+        options.encoding = 'UTF-8'
+    }
+}
+catalog.modules.each { spec ->
+    project(":${spec.name}") {
+        dependencies {
+            spec.dependencies.each { dependencyName ->
+                implementation project(":${dependencyName}")
+            }
+        }
+    }
+}
+
+tasks.register('checkArchitecture', Exec) {
+    commandLine(providers.gradleProperty('pythonExecutable').getOrElse('python3'),
+                'tools/check_architecture.py')
+}
+tasks.named('check') {
+    dependsOn 'checkArchitecture'
+    dependsOn subprojects.collect { it.tasks.named('check') }
+}

@@ -1,0 +1,13 @@
+# Local build outputs and IDE state
+.gradle/
+**/build/
+.idea/
+*.iml
+.DS_Store
+__pycache__/
+*.pyc
+# Local game installation and private fixtures
+local.properties
+local/
+fixtures/private/
+*.class

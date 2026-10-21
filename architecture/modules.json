@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "javaRelease": 17,
+  "apiStatus": "draft",
+  "modules": [
+    {
+      "name": "foundation-api",
+      "path": "foundation-api",
+      "package": "org.projectfoundation.api",
+      "dependencies": []
+    },
+    {
+      "name": "foundation-runtime",
+      "path": "foundation-runtime",
+      "package": "org.projectfoundation.runtime",
+      "dependencies": [
+        "foundation-api"
+      ]
+    },
+    {
+      "name": "graphics-api",
+      "path": "graphics-api",
+      "package": "org.projectfoundation.graphics.api",
+      "dependencies": [
+        "foundation-api"
+      ]
+    },
+    {
+      "name": "graphics-runtime",
+      "path": "graphics-runtime",
+      "package": "org.projectfoundation.graphics.runtime",
+      "dependencies": [
+        "graphics-api"
+      ]
+    },
+    {
+      "name": "graphics-vulkan",
+      "path": "graphics-vulkan",
+      "package": "org.projectfoundation.graphics.vulkan",
+      "dependencies": [
+        "graphics-api"
+      ]
+    },
+    {
+      "name": "graphics-vulkan-interop",
+      "path": "graphics-vulkan-interop",
+      "package": "org.projectfoundation.graphics.vulkan.interop",
+      "dependencies": [
+        "graphics-api"
+      ]
+    },
+    {
+      "name": "presentation",
+      "path": "presentation",
+      "package": "org.projectfoundation.presentation",
+      "dependencies": [
+        "graphics-api"
+      ]
+    },
+    {
+      "name": "platform-api",
+      "path": "platform-api",
+      "package": "org.projectfoundation.platform.api",
+      "dependencies": [
+        "foundation-api"
+      ]
+    },
+    {
+      "name": "platform-glfw",
+      "path": "platform-glfw",
+      "package": "org.projectfoundation.platform.glfw",
+      "dependencies": [
+        "platform-api"
+      ]
+    },
+    {
+      "name": "adapter-pz",
+      "path": "adapters/pz",
+      "package": "org.projectfoundation.adapter.pz",
+      "dependencies": [
+        "foundation-api",
+        "graphics-api",
+        "presentation",
+        "platform-api"
+      ]
+    },
+    {
+      "name": "foundation-reference",
+      "path": "mods/foundation-reference",
+      "package": "org.projectfoundation.reference",
+      "dependencies": [
+        "foundation-runtime",
+        "graphics-runtime",
+        "graphics-vulkan",
+        "presentation",
+        "platform-glfw",
+        "adapter-pz"
+      ]
+    },
+    {
+      "name": "graphics-lab",
+      "path": "tools/graphics-lab",
+      "package": "org.projectfoundation.tools.graphicslab",
+      "dependencies": [
+        "foundation-runtime",
+        "graphics-runtime",
+        "graphics-vulkan",
+        "presentation",
+        "platform-glfw"
+      ]
+    },
+    {
+      "name": "frame-replay",
+      "path": "tools/frame-replay",
+      "package": "org.projectfoundation.tools.framereplay",
+      "dependencies": [
+        "foundation-runtime",
+        "graphics-runtime",
+        "graphics-vulkan",
+        "presentation"
+      ]
+    }
+  ]
+}
